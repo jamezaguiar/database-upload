@@ -119,7 +119,7 @@ Em cada teste, tem uma breve descrição no que sua aplicação deve cumprir par
 Para esse desafio, temos os seguintes testes:
 
 <h4 align="center">
-  ⚠️ Antes de rodar os testes, crie um banco de dados com o nome "gostack_desafio06_tests" para que todos os testes possam executar corretamente ⚠️
+  ⚠️ Antes de rodar os testes, crie um banco de dados com o nome "database_upload_tests" para que todos os testes possam executar corretamente ⚠️
 </h4>
 
 - **`should be able to create a new transaction`**: Para que esse teste passe, sua aplicação deve permitir que uma transação seja criada, e retorne um json com a transação criado.
