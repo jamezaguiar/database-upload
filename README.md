@@ -1,5 +1,3 @@
-<img alt="GoStack" src="https://storage.googleapis.com/golden-wind/bootcamp-gostack/header-desafios.png" />
-
 <h1 align="center">
   Banco de dados e upload de arquivos no Node.js
 </h1>
