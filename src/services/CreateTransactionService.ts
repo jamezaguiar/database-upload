@@ -24,8 +24,14 @@ class CreateTransactionService {
     const categoriesRepository = getCustomRepository(CategoriesRepository);
     const transactionsRepository = getCustomRepository(TransactionsRepository);
 
-    if (type !== 'income' && type !== 'outcome') {
+    if (!['income', 'outcome'].includes(type)) {
       throw new AppError('Transaction type must be income or outcome');
+    }
+
+    const { total } = await transactionsRepository.getBalance();
+
+    if (type === 'outcome' && total < value) {
+      throw new AppError('Insufficient funds');
     }
 
     const category = await categoriesRepository.verifyIfCategoryExists(
