@@ -1,6 +1,6 @@
 import { getCustomRepository } from 'typeorm';
 
-// import AppError from '../errors/AppError';
+import AppError from '../errors/AppError';
 
 import Transaction from '../models/Transaction';
 
@@ -23,6 +23,10 @@ class CreateTransactionService {
   }: RequestDTO): Promise<Transaction> {
     const categoriesRepository = getCustomRepository(CategoriesRepository);
     const transactionsRepository = getCustomRepository(TransactionsRepository);
+
+    if (type !== 'income' && type !== 'outcome') {
+      throw new AppError('Transaction type must be income or outcome');
+    }
 
     const category = await categoriesRepository.verifyIfCategoryExists(
       category_title,
