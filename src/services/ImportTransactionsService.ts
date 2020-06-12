@@ -1,8 +1,11 @@
+/* eslint-disable no-restricted-syntax */
 import Transaction from '../models/Transaction';
 
 import CreateTransactionService from './CreateTransactionService';
 
 import csvParse from '../utils/csvParse';
+
+export type transactionType = 'income' | 'outcome';
 
 class ImportTransactionsService {
   async execute(fileName: string): Promise<Transaction[]> {
@@ -10,9 +13,13 @@ class ImportTransactionsService {
 
     const data = await csvParse(fileName);
 
-    /* const newTransactions = data.map(async transactionData => {
-      const transactions: Transaction[] = [];
-      const [title, type, value, category] = transactionData;
+    const transactions: Transaction[] = [];
+
+    for await (const transactionData of data) {
+      const title = transactionData[0];
+      const type: transactionType = transactionData[1] as transactionType;
+      const value = Number(transactionData[2]);
+      const category = transactionData[3];
 
       const transaction = await createTransaction.execute({
         title,
@@ -22,10 +29,9 @@ class ImportTransactionsService {
       });
 
       transactions.push(transaction);
-      return transactions;
-    });
+    }
 
-    return newTransactions; */
+    return transactions;
   }
 }
 
