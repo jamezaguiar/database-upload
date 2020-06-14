@@ -20,7 +20,15 @@ class ListTransactionService {
     const transactionsRepository = getCustomRepository(TransactionsRepository);
 
     const transactions = await transactionsRepository.find({
-      select: ['id', 'title', 'type', 'value', 'created_at', 'updated_at'],
+      select: [
+        'id',
+        'title',
+        'type',
+        'value',
+        'category_id',
+        'created_at',
+        'updated_at',
+      ],
       relations: ['category'],
     });
     const balance = await transactionsRepository.getBalance();
